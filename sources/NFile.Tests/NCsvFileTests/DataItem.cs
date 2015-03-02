@@ -30,6 +30,14 @@ namespace NFile.Tests.NCsvFileTests
         }
     }
 
+    public class DataItemWithParameters
+    {
+        public string Name { get; set; }
+        public int Id { get; set; }
+        public double Growth { get; set; }
+        public List<double> Parameters { get; set; } 
+    }
+
     public class DataObject
     {
         public string VersionId { get; set; }
@@ -51,5 +59,11 @@ namespace NFile.Tests.NCsvFileTests
                 return ((VersionId != null ? VersionId.GetHashCode() : 0) * 397) ^ (Items != null ? Items.GetHashCode() : 0);
             }
         }
+    }
+
+    public class DataObjectWithParameters
+    {
+        public string VersionId { get; set; }
+        public List<DataItemWithParameters> Items { get; set; }
     }
 }

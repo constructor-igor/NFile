@@ -23,7 +23,7 @@ namespace NFile.Framework
 
             if (NTypeHelper.IsEnumerableType(dataObjectType))
             {
-                List<PropertyInfo> properties = WriteHeader(dataObjectType);
+                List<PropertyInfo> properties = WriteHeader(dataObjectType, dataObject);
 
                 IEnumerable dataObjectList = dataObject as IEnumerable;
                 foreach (object dataItem in dataObjectList)
@@ -60,16 +60,35 @@ namespace NFile.Framework
             }
         }
 
-        private List<PropertyInfo> WriteHeader(Type dataObjectType)
+        private List<PropertyInfo> WriteHeader(Type dataObjectType, object dataObject = null)
         {
             Type itemType = NTypeHelper.GetEnumerableType(dataObjectType);
             if (itemType == null)
                 throw new ArgumentException(String.Format("Not found type of collection '{0}'.", dataObjectType));
 
             PropertyInfo[] allPublicProperties = itemType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-            List<PropertyInfo> properties =
-                allPublicProperties.Where(pi => !pi.PropertyType.IsClass || pi.PropertyType == typeof (String)).ToList();
-            List<string> columnsNames = properties.ConvertAll(pi => pi.Name);
+            List<PropertyInfo> properties = allPublicProperties.Where(NTypeHelper.SupportedProperty).ToList();
+
+            List<string> columnsNames = new List<string>();
+            foreach (PropertyInfo propertyInfo in properties)
+            {
+                if (NTypeHelper.IsEnumerableType(propertyInfo.PropertyType))
+                {
+                    if (dataObject != null)
+                    {
+                        int sizeOfList = (dataObject as ICollection).Count;
+                        for (int i = 0; i < sizeOfList; i++)
+                        {
+                            columnsNames.Add(String.Format("{0}_{1}", propertyInfo.Name, i));
+                        }
+                    }
+                }
+                else
+                {
+                    columnsNames.Add(propertyInfo.Name);
+                }
+            }
+
             m_textWriter.WriteLine(String.Join(",", columnsNames));
             return properties;
         }
@@ -80,9 +99,5 @@ namespace NFile.Framework
             m_textWriter.Dispose();
         }
         #endregion
-
-        /*
-         * https://social.msdn.microsoft.com/Forums/vstudio/en-US/d8bfc1d6-fea5-4d6d-bb6d-1a16a181f0cf/getting-the-type-of-an-ienumerables-items-using-reflection
-         * */
     }
 }
