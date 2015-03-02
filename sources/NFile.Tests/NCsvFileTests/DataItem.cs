@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace NFile.Tests.NCsvFileTests
 {
     public class DataItem
@@ -25,5 +27,11 @@ namespace NFile.Tests.NCsvFileTests
                 return hashCode;
             }
         }
+    }
+
+    public class DataObject
+    {
+        public string VersionId { get; set; }
+        public List<DataItem> Items { get; set; }
     }
 }

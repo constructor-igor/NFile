@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -7,7 +8,7 @@ using NUnit.Framework;
 namespace NFile.Tests.NCsvFileTests
 {
     [TestFixture]
-    public class NCsvFileWriterTests
+    public class NCsvFileWriterDataItemsTests
     {
         [Test]
         public void GenericList_TableHeader()
@@ -36,7 +37,7 @@ namespace NFile.Tests.NCsvFileTests
             var sb = new StringBuilder();
             using (NCsvFileWriter csvFileWriter = new NCsvFileWriter(new StringWriter(sb)))
             {
-                csvFileWriter.Write(new List());
+                csvFileWriter.Write(new ArrayList());
             }
         }
 
@@ -58,6 +59,26 @@ namespace NFile.Tests.NCsvFileTests
                 .AppendLine("Name,Id,Growth")
                 .AppendLine("Joe,1,170.5")
                 .AppendLine("Tom,2,180.5")
+                .ToString()));
+        }
+    }
+
+    [TestFixture]
+    public class NCsvFileWriterDataObjectTests
+    {
+        [Test]
+        public void DataObjectWithEmptyList()
+        {
+            DataObject dataObject = new DataObject {VersionId = "Ver=1"};
+
+            var sb = new StringBuilder();
+            using (NCsvFileWriter csvFileWriter = new NCsvFileWriter(new StringWriter(sb)))
+            {
+                csvFileWriter.Write(dataObject);
+            }
+            Assert.That(sb.ToString(), Is.EqualTo(new StringBuilder()
+                .AppendLine("Ver=1")
+                .AppendLine("Name,Id,Growth")
                 .ToString()));
         }
     }
