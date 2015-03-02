@@ -49,6 +49,8 @@
   <ItemGroup>
     <Compile Include="AcceptanceTests.cs" />
     <Compile Include="FolderComparisonTests.cs" />
+    <Compile Include="NCsvFileTests\NCsvFileReaderTests.cs" />
+    <Compile Include="NCsvFileTests\NCsvFileWriterTests.cs" />
     <Compile Include="TemporaryCollectionTests.cs" />
     <Compile Include="TemporaryFileTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -63,6 +65,7 @@
       <Name>NFile.Framework</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

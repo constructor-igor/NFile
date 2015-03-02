@@ -47,6 +47,7 @@
     <Compile Include="Internals\FileOperations.cs" />
     <Compile Include="ITemporaryFile.cs" />
     <Compile Include="ITemporaryFolder.cs" />
+    <Compile Include="NCsvFile.cs" />
     <Compile Include="TemporaryCollection.cs" />
     <Compile Include="TemporaryFile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
