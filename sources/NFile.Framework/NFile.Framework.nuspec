@@ -6,11 +6,11 @@
     <title>$title$</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
-    <projectUrl>http://http://nfile.codeplex.com</projectUrl>
+    <projectUrl>https://github.com/constructor-igor/NFile</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <releaseNotes>NFile library (classes TemporaryFile, TemporaryFolder, TemporaryCollection).</releaseNotes>
-    <copyright>Copyright 2012</copyright>
-    <tags>c# file folder library NFile temporay</tags>
+    <copyright>Copyright 2012-2015</copyright>
+    <tags>c# file folder library NFile temporary</tags>
   </metadata>
 </package>
