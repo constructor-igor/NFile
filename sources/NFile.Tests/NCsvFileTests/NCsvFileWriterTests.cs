@@ -61,12 +61,4 @@ namespace NFile.Tests.NCsvFileTests
                 .ToString()));
         }
     }
-
-    public class DataItem
-    {
-        public string Name { get; set; }
-        public int Id { get; set; }
-        public double Growth { get; set; }
-    }
-    
 }

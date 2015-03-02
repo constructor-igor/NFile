@@ -30,10 +30,16 @@ namespace NFile.Tests.NCsvFileTests
             sb.AppendLine("Joe,1,170.5");
             sb.AppendLine("Tom,2,180.5");
 
+            List<DataItem> expected = new List<DataItem>
+            {
+                new DataItem {Name = "Joe", Id = 1, Growth = 170.5},
+                new DataItem {Name = "Tom", Id = 2, Growth = 180.5}
+            };
+
             using (NCsvFileReader csvFile = new NCsvFileReader(new StringReader(sb.ToString())))
             {
-                IList<DataItem> actualContent = csvFile.ReadLines<DataItem>();
-                Assert.That(actualContent.Any(), Is.True);
+                IList<DataItem> actualContent = csvFile.ReadLines<DataItem>();                
+                Assert.That(actualContent, Is.EquivalentTo(expected));
             }
         }
     }

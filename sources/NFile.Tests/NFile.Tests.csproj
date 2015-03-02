@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="AcceptanceTests.cs" />
     <Compile Include="FolderComparisonTests.cs" />
+    <Compile Include="NCsvFileTests\DataItem.cs" />
     <Compile Include="NCsvFileTests\NCsvFileReaderTests.cs" />
     <Compile Include="NCsvFileTests\NCsvFileWriterTests.cs" />
     <Compile Include="TemporaryCollectionTests.cs" />
