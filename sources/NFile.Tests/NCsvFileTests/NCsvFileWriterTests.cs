@@ -4,7 +4,7 @@ using System.Text;
 using NFile.Framework;
 using NUnit.Framework;
 
-namespace NFile.Tests
+namespace NFile.Tests.NCsvFileTests
 {
     [TestFixture]
     public class NCsvFileWriterTests
@@ -13,9 +13,9 @@ namespace NFile.Tests
         public void GenericList_TableHeader()
         {
             var sb = new StringBuilder();
-            using (NCsvFile csvFile = new NCsvFile(new StringWriter(sb)))
+            using (NCsvFileWriter csvFileWriter = new NCsvFileWriter(new StringWriter(sb)))
             {
-                csvFile.Write(new List<DataItem>());
+                csvFileWriter.Write(new List<DataItem>());
             }
             Assert.That(sb.ToString(), Is.EqualTo(new StringBuilder().AppendLine("Name,Id,Growth").ToString()));
         }
@@ -23,9 +23,9 @@ namespace NFile.Tests
         public void TypedArray_TableHeader()
         {
             var sb = new StringBuilder();
-            using (NCsvFile csvFile = new NCsvFile(new StringWriter(sb)))
+            using (NCsvFileWriter csvFileWriter = new NCsvFileWriter(new StringWriter(sb)))
             {
-                csvFile.Write(new DataItem[]{});
+                csvFileWriter.Write(new DataItem[]{});
             }
             Assert.That(sb.ToString(), Is.EqualTo(new StringBuilder().AppendLine("Name,Id,Growth").ToString()));
         }
@@ -34,9 +34,9 @@ namespace NFile.Tests
         public void List_Exception()
         {
             var sb = new StringBuilder();
-            using (NCsvFile csvFile = new NCsvFile(new StringWriter(sb)))
+            using (NCsvFileWriter csvFileWriter = new NCsvFileWriter(new StringWriter(sb)))
             {
-                csvFile.Write(new List());
+                csvFileWriter.Write(new List());
             }
         }
 
@@ -50,9 +50,9 @@ namespace NFile.Tests
             };
 
             var sb = new StringBuilder();
-            using (NCsvFile csvFile = new NCsvFile(new StringWriter(sb)))
+            using (NCsvFileWriter csvFileWriter = new NCsvFileWriter(new StringWriter(sb)))
             {
-                csvFile.Write(dataItemList);
+                csvFileWriter.Write(dataItemList);
             }
             Assert.That(sb.ToString(), Is.EqualTo(new StringBuilder()
                 .AppendLine("Name,Id,Growth")
