@@ -20,7 +20,7 @@ namespace NFile.Framework
         {
             Type dataObjectType = dataObject.GetType();
 
-            if (IsEnumerableType(dataObjectType))
+            if (NTypeHelper.IsEnumerableType(dataObjectType))
             {
                 List<PropertyInfo> properties = WriteHeader(dataObjectType);
 
@@ -42,7 +42,7 @@ namespace NFile.Framework
             {
                 object propertyObject = propertyInfo.GetValue(dataObject, null);
                 Type propertyType = propertyInfo.PropertyType;
-                if (IsEnumerableType(propertyType))
+                if (NTypeHelper.IsEnumerableType(propertyType))
                 {
                     if (propertyObject == null)
                         WriteHeader(propertyType);
@@ -61,7 +61,7 @@ namespace NFile.Framework
 
         private List<PropertyInfo> WriteHeader(Type dataObjectType)
         {
-            Type itemType = GetEnumerableType(dataObjectType);
+            Type itemType = NTypeHelper.GetEnumerableType(dataObjectType);
             if (itemType == null)
                 throw new ArgumentException(String.Format("Not found type of collection '{0}'.", dataObjectType));
 
@@ -83,7 +83,11 @@ namespace NFile.Framework
         /*
          * https://social.msdn.microsoft.com/Forums/vstudio/en-US/d8bfc1d6-fea5-4d6d-bb6d-1a16a181f0cf/getting-the-type-of-an-ienumerables-items-using-reflection
          * */
-        private Type GetEnumerableType(Type dataObjectType)
+    }
+
+    internal class NTypeHelper
+    {
+        internal static Type GetEnumerableType(Type dataObjectType)
         {
             //Type dataObjectType = dataObject.GetType();
             if (dataObjectType.IsArray)
@@ -103,17 +107,15 @@ namespace NFile.Framework
             }
             return elementType;
         }
-
-        private bool IsEnumerableType(Type dataObjectType)
+        internal static bool IsEnumerableType(Type dataObjectType)
         {
             if (dataObjectType == typeof(string))
-                return false;            
+                return false;
             if (dataObjectType.IsArray)
                 return true;
 
             Type[] interfaces = dataObjectType.GetInterfaces();
-            return interfaces.Any(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof (IEnumerable<>));
+            return interfaces.Any(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IEnumerable<>));
         }
-
     }
 }

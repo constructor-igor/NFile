@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace NFile.Tests.NCsvFileTests
 {
@@ -36,7 +37,7 @@ namespace NFile.Tests.NCsvFileTests
         public override bool Equals(object obj)
         {
             DataObject other = (DataObject) obj;
-            return VersionId == other.VersionId && Items.Equals(other.Items);
+            return VersionId == other.VersionId && Items.SequenceEqual(other.Items);
         }
 
         protected bool Equals(DataObject other)

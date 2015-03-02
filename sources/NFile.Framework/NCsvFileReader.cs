@@ -61,7 +61,35 @@ namespace NFile.Framework
         }
         public T Read<T>()
         {
-            throw new NotImplementedException();
+            Type dataObjectType = typeof(T);
+            T dataObject = (T)Activator.CreateInstance(dataObjectType);
+
+            List<PropertyInfo> objectProperties = dataObjectType
+                .GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                .ToList();
+
+            foreach (PropertyInfo propertyInfo in objectProperties)
+            {
+                object propertyObject = propertyInfo.GetValue(dataObject, null);
+                Type propertyType = propertyInfo.PropertyType;
+                if (NTypeHelper.IsEnumerableType(propertyType))
+                {
+                    MethodInfo method = this.GetType().GetMethod("ReadLines");
+                    MethodInfo genericMethod = method.MakeGenericMethod(NTypeHelper.GetEnumerableType(propertyType));
+                    object dataValue = genericMethod.Invoke(this, null);
+                    propertyInfo.SetValue(dataObject, dataValue, null);
+                }
+                else if (propertyInfo.PropertyType.Name == "String")
+                {
+                    string dataValue = m_textReader.ReadLine();
+                    propertyInfo.SetValue(dataObject, dataValue, null);
+                }
+                else
+                {
+                    throw new NotImplementedException();
+                }
+            }
+            return dataObject;
         }
 
         #region IDisposable
