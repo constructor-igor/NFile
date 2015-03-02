@@ -16,7 +16,7 @@ namespace NFile.Tests
                 File.AppendAllText(temporaryFile.FileName, "[1]: additional text");
 
                 string allText = File.ReadAllText(temporaryFile.FileName);
-                Assert.AreEqual("[0]: test" + "[1]: additional text", allText);
+                Assert.That(allText, Is.EqualTo("[0]: test" + "[1]: additional text"));
             }
         }
         [Test]
@@ -29,7 +29,7 @@ namespace NFile.Tests
                 File.AppendAllText(filePath, "[1]: additional text");
 
                 string allText = File.ReadAllText(filePath);
-                Assert.AreEqual("[0]: test" + "[1]: additional text", allText);
+                Assert.That(allText, Is.EqualTo("[0]: test" + "[1]: additional text"));
             }
         }
     }

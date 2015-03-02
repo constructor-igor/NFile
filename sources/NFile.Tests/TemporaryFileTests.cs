@@ -14,14 +14,14 @@ namespace NFile.Tests
         public void TemporaryFile_basedOnITemporaryFile()
         {
             var temporaryFile = new TemporaryFile();
-            Assert.IsInstanceOf<ITemporaryFile>(temporaryFile);
+            Assert.That(temporaryFile, Is.InstanceOf<ITemporaryFile>());
         }
         [Test]
         public void Constructor_Empty_FileNameExtensionTmp()
         {
             using (var temporaryFile = new TemporaryFile())
             {
-                Assert.AreEqual(".tmp", Path.GetExtension(temporaryFile.FileName));
+                Assert.That(Path.GetExtension(temporaryFile.FileName), Is.EqualTo(".tmp"));
             }
         }
         [Test]
@@ -29,7 +29,7 @@ namespace NFile.Tests
         {
             using (var temporaryFile = new TemporaryFile())
             {
-                Assert.IsTrue(File.Exists(temporaryFile.FileName));
+                Assert.That(File.Exists(temporaryFile.FileName), Is.True);
             }
         }
         [Test]
@@ -37,7 +37,7 @@ namespace NFile.Tests
         {
             using (var temporaryFile = new TemporaryFile())
             {
-                Assert.AreEqual(Path.GetTempPath(), Path.GetDirectoryName(temporaryFile.FileName)+@"\");
+                Assert.That(Path.GetDirectoryName(temporaryFile.FileName) + @"\", Is.EqualTo(Path.GetTempPath()));
             }
         }
         [Test]
@@ -48,7 +48,7 @@ namespace NFile.Tests
             {
                 fileName = temporaryFile.FileName;
             }
-            Assert.IsFalse(File.Exists(fileName));
+            Assert.That(File.Exists(fileName), Is.False);
         }
         [Test]
         public void Constructor_ExtensionTxt_FileNameExtensionTxt()
@@ -58,12 +58,12 @@ namespace NFile.Tests
             {
                 fileName = temporaryFile.FileName;
 
-                Assert.AreEqual(".txt", Path.GetExtension(temporaryFile.FileName));
-                Assert.AreEqual(Path.GetTempPath(), Path.GetDirectoryName(temporaryFile.FileName) + @"\");
+                Assert.That(Path.GetExtension(temporaryFile.FileName), Is.EqualTo(".txt"));
+                Assert.That(Path.GetDirectoryName(temporaryFile.FileName) + @"\", Is.EqualTo(Path.GetTempPath()));
                 
-                Assert.IsFalse(File.Exists(temporaryFile.FileName));
+                Assert.That(File.Exists(temporaryFile.FileName), Is.False);
                 File.WriteAllBytes(temporaryFile.FileName, new byte[]{0});
-                Assert.IsTrue(File.Exists(temporaryFile.FileName));
+                Assert.That(File.Exists(temporaryFile.FileName), Is.True);
             }
             Assert.IsFalse(File.Exists(fileName));
         }
@@ -76,21 +76,21 @@ namespace NFile.Tests
             testDomain.DoCallBack(delegate
                 {
                     var temporaryFile = new TemporaryFile();
-                    Assert.IsTrue(File.Exists(temporaryFile.FileName));
+                    Assert.That(File.Exists(temporaryFile.FileName), Is.True);
                     AppDomain.CurrentDomain.SetData(APP_TRANSFER_FILE_NAME, temporaryFile.FileName);
                 }
             );
             var createdTemporaryFileName = (string)testDomain.GetData(APP_TRANSFER_FILE_NAME);
-            Assert.IsTrue(File.Exists(createdTemporaryFileName));
+            Assert.That(File.Exists(createdTemporaryFileName), Is.True);
             AppDomain.Unload(testDomain);
 
-            Assert.IsFalse(File.Exists(createdTemporaryFileName), "temporary file should be deleted by finalizer");
+            Assert.That(File.Exists(createdTemporaryFileName), Is.False, "temporary file should be deleted by finalizer");
         }
         [Test, ExpectedException(typeof(ObjectDisposedException))]
         public void FileName_AfterDispose_GenerateObjectDisposedException()
         {
             var temporaryFile = new TemporaryFile();
-            Assert.IsNotNull(temporaryFile.FileName);
+            Assert.That(temporaryFile.FileName, Is.Not.Null);
             temporaryFile.Dispose();
             string fileName = temporaryFile.FileName;
             Assert.Fail("expected exception ObjectDisposedException");

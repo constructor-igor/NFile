@@ -25,13 +25,13 @@ namespace NFile.Tests
                 fileName2 = file2.FileName;
                 fileName3 = file3.FileName;
 
-                Assert.IsTrue(File.Exists(fileName1));
-                Assert.IsTrue(File.Exists(fileName2));
-                Assert.IsTrue(File.Exists(fileName3));
+                Assert.That(File.Exists(fileName1), Is.True);
+                Assert.That(File.Exists(fileName2), Is.True);
+                Assert.That(File.Exists(fileName3), Is.True);
             }
-            Assert.IsFalse(File.Exists(fileName1));
-            Assert.IsFalse(File.Exists(fileName2));
-            Assert.IsFalse(File.Exists(fileName3));
+            Assert.That(File.Exists(fileName1), Is.False);
+            Assert.That(File.Exists(fileName2), Is.False);
+            Assert.That(File.Exists(fileName3), Is.False);
         }
         [Test]
         public void Dispose_AddTemporaryFileAndTemporaryFolder_AllDeleted()
@@ -46,14 +46,14 @@ namespace NFile.Tests
                 fileName = file.FileName;
                 folderName = folder.Folder;
 
-                Assert.IsTrue(File.Exists(fileName));
-                Assert.IsTrue(Directory.Exists(folderName));
+                Assert.That(File.Exists(fileName), Is.True);
+                Assert.That(Directory.Exists(folderName), Is.True);
             }
-            Assert.IsFalse(File.Exists(fileName));
-            Assert.IsFalse(Directory.Exists(folderName));
+            Assert.That(File.Exists(fileName), Is.False);
+            Assert.That(Directory.Exists(folderName), Is.False);
         }
         [Test]
-        public void Dispose_DoubleRun_NoExcpetions()
+        public void Dispose_DoubleRun_NoExceptions()
         {
             var temporaryCollection = new TemporaryCollection();
             try

@@ -12,14 +12,14 @@ namespace NFile.Tests
         public void TemporaryFolder_basedOnITemporaryFolder()
         {
             var temporaryFolder = new TemporaryFolder();
-            Assert.IsInstanceOf<ITemporaryFolder>(temporaryFolder);
+            Assert.That(temporaryFolder, Is.InstanceOf<ITemporaryFolder>());
         }
         [Test]
         public void Ctor_Folder_PlacedIntoWindowsTempoFolder()
         {
             using (var temporaryFolder = new TemporaryFolder())
             {
-                Assert.IsTrue(temporaryFolder.Folder.StartsWith(Path.GetTempPath()));
+                Assert.That(temporaryFolder.Folder.StartsWith(Path.GetTempPath()), Is.True);
             }
         }
         [Test]
@@ -35,7 +35,7 @@ namespace NFile.Tests
                 Directory.CreateDirectory(subFolder);
                 File.WriteAllText(Path.Combine(subFolder, "file.txt"), "test");
             }
-            Assert.IsFalse(Directory.Exists(createdTemporaryFolder));
+            Assert.That(Directory.Exists(createdTemporaryFolder), Is.False);
         }
         [Test, ExpectedException(typeof(ObjectDisposedException))]
         public void FileName_AfterDispose_GenerateObjectDisposedException()

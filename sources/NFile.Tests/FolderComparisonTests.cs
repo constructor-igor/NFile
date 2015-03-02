@@ -14,7 +14,7 @@ namespace NFile.Tests
             IFolder folder1 = null;
             IFolder folder2 = null;
             IFolderComparisonReport report = folder1.Compare(folder2);
-            Assert.IsTrue(report.Equal);
+            Assert.That(report.Equal, Is.True);
         }
         [Test]
         public void FolderComparison_NullAndNotExistsFolders_True()
@@ -24,7 +24,7 @@ namespace NFile.Tests
                 IFolder folder1 = new DataFolder(temporaryFolder.Folder + "\\" + "test");
                 IFolder folder2 = null;
                 IFolderComparisonReport report = folder1.Compare(folder2);
-                Assert.IsTrue(report.Equal);
+                Assert.That(report.Equal, Is.True);
             }
         }
         [Test]
@@ -35,7 +35,7 @@ namespace NFile.Tests
                 IFolder folder1 = null;
                 IFolder folder2 = new DataFolder(temporaryFolder.Folder + "\\" + "test");
                 IFolderComparisonReport report = folder1.Compare(folder2);
-                Assert.IsTrue(report.Equal);
+                Assert.That(report.Equal, Is.True);
             }
         }
         [Test]
@@ -45,7 +45,7 @@ namespace NFile.Tests
             {
                 IFolder nullFolder = null;
                 IFolderComparisonReport report = temporaryFolder.Compare(nullFolder);
-                Assert.IsFalse(report.Equal);
+                Assert.That(report.Equal, Is.False);
             }
         }
         [Test]
@@ -57,7 +57,7 @@ namespace NFile.Tests
                 IFolder folder2 = new DataFolder(temporaryFolder.Folder + "\\" + "test2");
 
                 IFolderComparisonReport report = folder1.Compare(folder2);
-                Assert.IsTrue(report.Equal);
+                Assert.That(report.Equal, Is.True);
             }
         }
         [Test]
@@ -68,7 +68,7 @@ namespace NFile.Tests
                 IFolder folder2 = new DataFolder(temporaryFolder.Folder + "\\" + "test2");
 
                 IFolderComparisonReport report = temporaryFolder.Compare(folder2);
-                Assert.IsFalse(report.Equal);
+                Assert.That(report.Equal, Is.False);
             }
         }
         [Test]
@@ -79,7 +79,7 @@ namespace NFile.Tests
                 IFolder folder2 = new DataFolder(temporaryFolder.Folder + "\\" + "test2");
 
                 IFolderComparisonReport report = folder2.Compare(temporaryFolder);
-                Assert.IsFalse(report.Equal);
+                Assert.That(report.Equal, Is.False);
             }
         }
         [Test]
@@ -89,7 +89,7 @@ namespace NFile.Tests
             using (var temporaryFolder2 = new TemporaryFolder())
             {
                 IFolderComparisonReport report = temporaryFolder1.Compare(temporaryFolder2);
-                Assert.IsTrue(report.Equal);
+                Assert.That(report.Equal, Is.True);
             }
         }
         [Test]
@@ -102,7 +102,7 @@ namespace NFile.Tests
                 temporaryFolder2.CreateFile("file2_1");
                 temporaryFolder2.CreateFile("file2_2");
                 IFolderComparisonReport report = temporaryFolder1.Compare(temporaryFolder2);
-                Assert.IsFalse(report.Equal);
+                Assert.That(report.Equal, Is.False);
             }
         }
         [Test]
@@ -114,7 +114,7 @@ namespace NFile.Tests
                 temporaryFolder1.CreateFile("file_1");
                 temporaryFolder2.CreateFile("file_2");
                 IFolderComparisonReport report = temporaryFolder1.Compare(temporaryFolder2);
-                Assert.IsFalse(report.Equal);
+                Assert.That(report.Equal, Is.False);
             }
         }
         [Test]
@@ -126,7 +126,7 @@ namespace NFile.Tests
                 temporaryFolder1.CreateFile("file_1");
                 temporaryFolder2.CreateFile("file_1");
                 IFolderComparisonReport report = temporaryFolder1.Compare(temporaryFolder2);
-                Assert.IsTrue(report.Equal);
+                Assert.That(report.Equal, Is.True);
             }
         }
         [Test]
@@ -139,7 +139,7 @@ namespace NFile.Tests
                 temporaryFolder2.CreateFolder("test1");
 
                 IFolderComparisonReport report = temporaryFolder1.Compare(temporaryFolder2);
-                Assert.IsTrue(report.Equal);
+                Assert.That(report.Equal, Is.True);
             }
         }
         [Test]
@@ -152,7 +152,7 @@ namespace NFile.Tests
                 temporaryFolder2.CreateFolder("test2");
 
                 IFolderComparisonReport report = temporaryFolder1.Compare(temporaryFolder2);
-                Assert.IsFalse(report.Equal);
+                Assert.That(report.Equal, Is.False);
             }
         }
         [Test]
@@ -167,7 +167,7 @@ namespace NFile.Tests
                 folder1.CreateFile("file_1");
                 folder2.CreateFile("file_2");
                 IFolderComparisonReport report = temporaryFolder1.Compare(temporaryFolder2);
-                Assert.IsFalse(report.Equal);
+                Assert.That(report.Equal, Is.False);
             }
         }
 
@@ -177,7 +177,7 @@ namespace NFile.Tests
             IFolder folder = null;
             string[] filesList = null;
             IFolderComparisonReport folderComparisonReport = folder.Compare(filesList);
-            Assert.IsTrue(folderComparisonReport.Equal);
+            Assert.That(folderComparisonReport.Equal, Is.True);
         }
         [Test]
         public void FolderComparison_FilesListFoundInFolder_True()
@@ -194,7 +194,7 @@ namespace NFile.Tests
                     .Split(new[] {Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries);
 
                 IFolderComparisonReport folderComparisonReport = temporaryFolder.Compare(filesList);
-                Assert.IsTrue(folderComparisonReport.Equal);
+                Assert.That(folderComparisonReport.Equal, Is.True);
             }
         }
         [Test]
@@ -217,7 +217,7 @@ namespace NFile.Tests
                     .Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
 
                 IFolderComparisonReport folderComparisonReport = temporaryFolder.Compare(filesList);
-                Assert.IsTrue(folderComparisonReport.Equal);
+                Assert.That(folderComparisonReport.Equal, Is.True);
             }
         }
         [Test]
@@ -239,7 +239,7 @@ namespace NFile.Tests
                     .Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
 
                 IFolderComparisonReport folderComparisonReport = temporaryFolder.Compare(filesList);
-                Assert.IsFalse(folderComparisonReport.Equal);
+                Assert.That(folderComparisonReport.Equal, Is.False);
             }
         }
 
@@ -257,7 +257,7 @@ namespace NFile.Tests
                 IFolderComparisonReport folderComparisonReport = temporaryFolder1.Compare(temporaryFolder2, ReportOption.CollectDifferentFiles);
                 CollectionAssert.AreEqual(new[] {"test2.txt"}, folderComparisonReport.Folder1Files);
                 CollectionAssert.AreEqual(new[] {"test3.txt"}, folderComparisonReport.Folder2Files);
-                Assert.IsFalse(folderComparisonReport.Equal);
+                Assert.That(folderComparisonReport.Equal, Is.False);
             }
         }
         [Test]
@@ -281,7 +281,7 @@ namespace NFile.Tests
                 IFolderComparisonReport folderComparisonReport = temporaryFolder1.Compare(temporaryFolder2, ReportOption.CollectDifferentFiles);
                 CollectionAssert.AreEqual(new[] { "test2.txt", "subfolder\\test1.txt" }, folderComparisonReport.Folder1Files);
                 CollectionAssert.AreEqual(new[] { "test3.txt", "subfolder\\test2.txt" }, folderComparisonReport.Folder2Files);
-                Assert.IsFalse(folderComparisonReport.Equal);
+                Assert.That(folderComparisonReport.Equal, Is.False);
             }
         }
         [Test]
@@ -300,7 +300,7 @@ namespace NFile.Tests
                 IFolderComparisonReport folderComparisonReport = temporaryFolder1.Compare(temporaryFolder2, ReportOption.CollectDifferentFiles);
                 CollectionAssert.AreEqual(new[] { "subfolder1" }, folderComparisonReport.Folder1Files);
                 CollectionAssert.AreEqual(new[] { "subfolder2" }, folderComparisonReport.Folder2Files);
-                Assert.IsFalse(folderComparisonReport.Equal);
+                Assert.That(folderComparisonReport.Equal, Is.False);
             }
         }
     }
