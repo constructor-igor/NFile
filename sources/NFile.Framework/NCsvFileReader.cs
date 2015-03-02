@@ -71,11 +71,10 @@ namespace NFile.Framework
 
             foreach (PropertyInfo propertyInfo in objectProperties)
             {
-                object propertyObject = propertyInfo.GetValue(dataObject, null);
                 Type propertyType = propertyInfo.PropertyType;
                 if (NTypeHelper.IsEnumerableType(propertyType))
                 {
-                    MethodInfo method = this.GetType().GetMethod("ReadLines");
+                    MethodInfo method = GetType().GetMethod("ReadLines");
                     MethodInfo genericMethod = method.MakeGenericMethod(NTypeHelper.GetEnumerableType(propertyType));
                     object dataValue = genericMethod.Invoke(this, null);
                     propertyInfo.SetValue(dataObject, dataValue, null);
