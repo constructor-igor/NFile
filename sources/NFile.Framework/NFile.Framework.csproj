@@ -43,10 +43,10 @@
     <Compile Include="DataFolder.cs" />
     <Compile Include="FolderComparison.cs" />
     <Compile Include="FolderExtensions.cs" />
-    <Compile Include="IFolder.cs" />
+    <Compile Include="Interfaces\IFolder.cs" />
     <Compile Include="Internals\FileOperations.cs" />
-    <Compile Include="ITemporaryFile.cs" />
-    <Compile Include="ITemporaryFolder.cs" />
+    <Compile Include="Interfaces\ITemporaryFile.cs" />
+    <Compile Include="Interfaces\ITemporaryFolder.cs" />
     <Compile Include="NCsvFileReader.cs" />
     <Compile Include="NCsvFileWriter.cs" />
     <Compile Include="TemporaryCollection.cs" />
