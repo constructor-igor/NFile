@@ -49,6 +49,7 @@
     <Compile Include="Interfaces\ITemporaryFolder.cs" />
     <Compile Include="NCsvFileReader.cs" />
     <Compile Include="NCsvFileWriter.cs" />
+    <Compile Include="Internals\NTypeHelper.cs" />
     <Compile Include="TemporaryCollection.cs" />
     <Compile Include="TemporaryFile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
