@@ -33,5 +33,22 @@ namespace NFile.Tests.NCsvFileTests
     {
         public string VersionId { get; set; }
         public List<DataItem> Items { get; set; }
+        public override bool Equals(object obj)
+        {
+            DataObject other = (DataObject) obj;
+            return VersionId == other.VersionId && Items.Equals(other.Items);
+        }
+
+        protected bool Equals(DataObject other)
+        {
+            return string.Equals(VersionId, other.VersionId) && Equals(Items, other.Items);
+        }
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return ((VersionId != null ? VersionId.GetHashCode() : 0) * 397) ^ (Items != null ? Items.GetHashCode() : 0);
+            }
+        }
     }
 }

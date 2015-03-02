@@ -59,6 +59,10 @@ namespace NFile.Framework
 
             return dataItems;
         }
+        public T Read<T>()
+        {
+            throw new NotImplementedException();
+        }
 
         #region IDisposable
         public void Dispose()
