@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <projectUrl>http://http://nfile.codeplex.com</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>NFile library (classes TemporaryFile, TemporaryFolder, TemporaryCollection).</releaseNotes>
+    <copyright>Copyright 2012</copyright>
+    <tags>c# file folder library NFile temporay</tags>
+  </metadata>
+</package>
